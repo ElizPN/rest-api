@@ -9,7 +9,7 @@ createApp({
         name: "Liza",
         value: "xs",
       },
-      contacts: []
+      contacts: [],
     };
   },
 }).mount("#app");
