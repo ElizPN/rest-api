@@ -13,12 +13,7 @@
     />
   </head>
   <body>
-    <script
-      type="module"
-      src="frontend.js
-    "
-    ></script>
-    <div class="container pt-3">
+    <div class="container pt-3" id="app">
       <h1>REST API</h1>
 
       <form class="form-inline mb-3" @submit.prevent="createContact">
@@ -48,7 +43,7 @@
       <div v-if="loading">
         <loader />
       </div>
-      <div v-else-if="contacts.length">
+      <div>
         <div class="card mb-3" v-for="contact in contacts">
           <div class="card-body">
             <h5
@@ -72,5 +67,10 @@
         </div>
       </div>
     </div>
+    <script
+      type="module"
+      src="frontend.js
+    "
+    ></script>
   </body>
 </html>
