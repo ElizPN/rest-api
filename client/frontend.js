@@ -15,7 +15,9 @@ createApp({
   methods: {
     createContact() {
       const { ...contact } = this.form;
-      
+      this.contacts.push({...contact, id: Date.now()})
+
+      this.form.name = this.form.value = ""
     
     },
   },
