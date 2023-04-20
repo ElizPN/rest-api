@@ -6,10 +6,17 @@ createApp({
   data() {
     return {
       form: {
-        name: "Liza",
-        value: "xs",
+        name: "",
+        value: "",
       },
       contacts: [],
     };
+  },
+  methods: {
+    createContact() {
+      const { ...contact } = this.form;
+      
+    
+    },
   },
 }).mount("#app");
