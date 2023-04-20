@@ -9,16 +9,27 @@ createApp({
         name: "",
         value: "",
       },
-      contacts: [],
+      contacts: [
+        { id: 1, name: "Liza", value: "+46-76-747-85-07", marked: false },
+      ],
     };
+  },
+  computed: {
+    canCreate () {
+      return this.form.value.trim() && this.form.value.trim()
+    }
   },
   methods: {
     createContact() {
       const { ...contact } = this.form;
-      this.contacts.push({...contact, id: Date.now()})
+      this.contacts.push({ ...contact, id: Date.now() });
 
-      this.form.name = this.form.value = ""
-    
+      this.form.name = this.form.value = "";
     },
+    markContact(id) {
+      const contact = this.contacts.find((elem) => elem.id === id);
+      contact.marked = true;
+    },
+    removeContact(id) {},
   },
 }).mount("#app");
