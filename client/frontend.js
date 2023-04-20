@@ -9,9 +9,7 @@ createApp({
         name: "",
         value: "",
       },
-      contacts: [
-        { id: 1, name: "Liza", value: "+46-76-747-85-07", marked: false },
-      ],
+      contacts: [],
     };
   },
   computed: {
@@ -34,4 +32,30 @@ createApp({
       this.contacts = this.contacts.filter((el) => el.id !== id);
     },
   },
+  mounted() {
+    console.log("Ready?");
+  },
 }).mount("#app");
+
+
+// Service to get data
+async function request(url, method = "GET", data = null) {
+  try {
+    const headers = {};
+    let body;
+
+    if (data) {
+      headers["Content-Type"] = "application/json";
+      body = JSON.stringify(data);
+    }
+
+    const response = await fetch(url, {
+      method,
+      headers,
+      body,
+    });
+    return await response.json();
+  } catch (err) {
+    console.warn("Error", err.message);
+  }
+}
