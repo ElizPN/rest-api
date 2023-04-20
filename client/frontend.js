@@ -15,14 +15,14 @@ createApp({
     };
   },
   computed: {
-    canCreate () {
-      return this.form.value.trim() && this.form.value.trim()
-    }
+    canCreate() {
+      return this.form.value.trim() && this.form.value.trim();
+    },
   },
   methods: {
     createContact() {
       const { ...contact } = this.form;
-      this.contacts.push({ ...contact, id: Date.now() });
+      this.contacts.push({ ...contact, id: Date.now(), marked: false });
 
       this.form.name = this.form.value = "";
     },
@@ -30,6 +30,8 @@ createApp({
       const contact = this.contacts.find((elem) => elem.id === id);
       contact.marked = true;
     },
-    removeContact(id) {},
+    removeContact(id) {
+      this.contacts = this.contacts.filter((el) => el.id !== id);
+    },
   },
 }).mount("#app");
