@@ -1,10 +1,11 @@
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 
-console.log(createApp);
+console.log("ololo");
 
-createApp({
+const app = createApp({
   data() {
     return {
+      loading: false,
       form: {
         name: "",
         value: "",
@@ -34,10 +35,29 @@ createApp({
   },
   // mounted saiys that our vue is ready. We make it async and wait antil our function request run
   async mounted() {
+    this.loading = true;
     const data = await request("/api/contacts");
     this.contacts = data;
+    this.loading = false;
   },
-}).mount("#app");
+});
+
+app.component(
+  // the registered name
+  "Loader",
+  // the implementation
+  {
+    template: `
+    <div style="display: flex;justify-content: center;align-items: center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  `,
+  }
+);
+
+app.mount("#app");
 
 // Service to get data
 async function request(url, method = "GET", data = null) {
