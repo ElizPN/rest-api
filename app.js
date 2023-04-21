@@ -8,7 +8,7 @@ const { v4 } = require("uuid");
 app.use(express.static(path.resolve(__dirname, "client")));
 
 // our "database"
-const CONTACTS = [
+let CONTACTS = [
   { id: v4(), name: "Liza Romanova", value: "+46-76-747-85-07", marked: false },
 ];
 
@@ -22,10 +22,15 @@ app.get("/api/contacts", (req, res) => {
   }, 1000);
 });
 
-app.post("/api/contacts", (req, res) => {
+app.post("/api/contacts/", (req, res) => {
   const contact = { ...req.body, id: v4(), marked: false };
   CONTACTS.push(contact);
   res.status(201).json(contact);
+});
+
+app.delete("/api/contacts/:id", (req, res) => {
+  CONTACTS = CONTACTS.filter((el) => el.id === req.params.id);
+  res.status(200).json({ message: "contact is deleted" });
 });
 
 // * means any routs ( any get requests)

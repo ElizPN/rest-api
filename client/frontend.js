@@ -32,7 +32,8 @@ const app = createApp({
       const contact = this.contacts.find((elem) => elem.id === id);
       contact.marked = true;
     },
-    removeContact(id) {
+    async removeContact(id) {
+      request(`/api/contacts/${id}`, "DELETE");
       this.contacts = this.contacts.filter((el) => el.id !== id);
     },
   },
