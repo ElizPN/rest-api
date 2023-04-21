@@ -13,7 +13,9 @@ const CONTACTS = [
 
 //create first url where we can get this data
 app.get("/api/contacts", (req, res) => {
-  res.status(200).json(CONTACTS);
+  setTimeout(() => {
+    res.status(200).json(CONTACTS);
+  }, 1000);
 });
 
 // * means any routs ( any get requests)
