@@ -32,11 +32,12 @@ createApp({
       this.contacts = this.contacts.filter((el) => el.id !== id);
     },
   },
-  mounted() {
-    console.log("Ready?");
+  // mounted saiys that our vue is ready. We make it async and wait antil our function request run
+  async mounted() {
+    const data = await request("/api/contacts");
+    this.contacts = data;
   },
 }).mount("#app");
-
 
 // Service to get data
 async function request(url, method = "GET", data = null) {
