@@ -1,23 +1,25 @@
-const express = require("express")
-const path = require("path")
-const app = express()
-
+const express = require("express");
+const path = require("path");
+const app = express();
 
 // to make folder client static
 //__dirname - current directory
-app.use(express.static(path.resolve(__dirname, "client")))
-
+app.use(express.static(path.resolve(__dirname, "client")));
 
 // our "database"
 const CONTACTS = [
-  { id: 1, name: "Liza", value: "+46-76-747-85-07", marked: false },
+  { id: 1, name: "Liza Romanova", value: "+46-76-747-85-07", marked: false },
 ];
 
+//create first url where we can get this data
+app.get("/api/contacts", (req, res) => {
+  res.status(200).json(CONTACTS);
+});
 
 // * means any routs ( any get requests)
-app.get("*", (req, res)=> {
-    res.sendFile(path.resolve(__dirname, "client", "index.html"))
-})
-app.listen(3000, ()=> {
-    console.log("Server has been started on port 3000");
-})
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "index.html"));
+});
+app.listen(3000, () => {
+  console.log("Server has been started on port 3000");
+});
