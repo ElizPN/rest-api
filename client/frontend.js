@@ -1,7 +1,5 @@
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 
-console.log("ololo");
-
 const app = createApp({
   data() {
     return {
@@ -28,9 +26,14 @@ const app = createApp({
 
       this.form.name = this.form.value = "";
     },
-    markContact(id) {
+    async markContact(id) {
       const contact = this.contacts.find((elem) => elem.id === id);
-      contact.marked = true;
+      const updated = await request(`/api/contacts/${id}`, "PUT", {
+        ...contact,
+        marked: true,
+      });
+      console.log(updated);
+      contact.marked = updated.marked;
     },
     async removeContact(id) {
       request(`/api/contacts/${id}`, "DELETE");
