@@ -7,7 +7,7 @@ const { v4 } = require("uuid");
 //__dirname - current directory
 app.use(express.static(path.resolve(__dirname, "client")));
 
-// our "database"
+// our "database". default
 let CONTACTS = [
   { id: v4(), name: "Liza Romanova", value: "+46-76-747-85-07", marked: false },
 ];
@@ -29,8 +29,15 @@ app.post("/api/contacts/", (req, res) => {
 });
 
 app.delete("/api/contacts/:id", (req, res) => {
-  CONTACTS = CONTACTS.filter((el) => el.id === req.params.id);
+  CONTACTS = CONTACTS.filter((el) => el.id !== req.params.id);
+  console.log(req.params.id);
   res.status(200).json({ message: "contact is deleted" });
+});
+
+app.put("/api/contacts/:id", (req, res) => {
+  const idx = CONTACTS.findIndex((el) => el.id === req.params.id);
+  CONTACTS[idx] = req.body;
+  res.status(200).json(CONTACTS[idx]);
 });
 
 // * means any routs ( any get requests)
