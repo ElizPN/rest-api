@@ -5,7 +5,7 @@ This is a REST API application built with Express and Vue.js, allowing users to 
 
 ## Technologies and libraries used: 
 
--  Language - [TypeScript](https://www.typescriptlang.org/)
+-  Language - [JavaScript](https://www.javascript.com/)
 -  Server Framework - [Express](https://expressjs.com/)
 -  Client Framework - [Vue](https://vuejs.org/)
 -  Styles - [Bootstrap](https://getbootstrap.com/) 
